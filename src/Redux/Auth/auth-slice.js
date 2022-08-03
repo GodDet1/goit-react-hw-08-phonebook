@@ -39,7 +39,7 @@ const authSlice = createSlice({
       state.isRefreshing = true;
     },
     [authOperations.fetchCurrentUser.rejected](state, action) {
-      state.isRefreshing = true;
+      state.isRefreshing = false;
     },
     [authOperations.fetchCurrentUser.fulfilled](state, action) {
       state.user = action.payload;
