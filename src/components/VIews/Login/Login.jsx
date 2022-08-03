@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import authOperations from 'Redux/Auth/auth-operations';
 import { Form, Label, LabelName } from './styled.module';
 

@@ -1,7 +1,6 @@
-import Register from 'components/VIews/Register/Register';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import authOperations from 'Redux/Auth/auth-operations';
 import styled from './styled.module.scss';
 
