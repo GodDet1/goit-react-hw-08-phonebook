@@ -1,0 +1,38 @@
+.container {
+  border-bottom: 2px solid black;
+  background-color: antiquewhite;
+
+  text-decoration: none;
+}
+
+.container__nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 20px;
+}
+
+.wellcome {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav__link {
+  margin-right: 20px;
+
+  text-decoration: inherit;
+}
+
+.log_link {
+  text-decoration: inherit;
+
+  &:first-child {
+    margin-right: 10px;
+  }
+
+  &:last-child {
+    margin-left: 10px;
+  }
+}

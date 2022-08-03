@@ -1,26 +1,44 @@
 import React from 'react';
 import { Container, List, ListItem, MyBtn } from './styled';
-import { useSelector } from 'react-redux';
-import { useDeleteDataMutation, useGetDataQuery } from 'Redux/API/API';
+import { useDispatch, useSelector } from 'react-redux';
 import { Bars } from 'react-loader-spinner';
+import { useEffect } from 'react';
+import phonebookOperations from 'Redux/Reducer/phonebook-operations';
 
 function PhoneList() {
-  const { data, isFetching, isSuccess } = useGetDataQuery();
-  const [deleteData] = useDeleteDataMutation();
+  const data = useSelector(
+    ({
+      phonebookSlice: {
+        contacts: { items },
+      },
+    }) => items
+  );
 
   const filter = useSelector(
     ({
-      noteReducer: {
+      phonebookSlice: {
         contacts: { filter },
       },
     }) => filter
   );
 
-  const filterUsers = () => data.filter(item => item.name.toLowerCase().includes(filter));
+  const dispatch = useDispatch();
+  const isFetching = useSelector(({ auth: { isLoggedIn } }) => isLoggedIn);
+
+  useEffect(() => {
+    dispatch(phonebookOperations.fetchUserPhonebook());
+  }, [dispatch]);
+
+  const filterUsers = () =>
+    data.filter(item => item.name.toLowerCase().includes(filter));
+
+  const handleDeleteUser = id => {
+    dispatch(phonebookOperations.deleteUserNotes(id));
+  };
 
   return (
     <Container>
-      {isFetching && (
+      {!isFetching && (
         <Bars
           color="#acacac"
           wrapperStyle={{
@@ -29,16 +47,16 @@ function PhoneList() {
         />
       )}
 
-      {isSuccess && filterUsers().length === 0 && <p> There is no user</p>}
+      {isFetching && filterUsers().length === 0 && <p> There is no user</p>}
 
-      {isSuccess && (
+      {isFetching && (
         <List>
           {filterUsers().map(item => (
             <ListItem key={item.id}>
               <p>
-                {item.name}: {item.phone}
+                {item.name}: {item.number}
               </p>
-              <MyBtn type="button" onClick={() => deleteData(item.id)}>
+              <MyBtn type="button" onClick={() => handleDeleteUser(item.id)}>
                 x
               </MyBtn>
             </ListItem>

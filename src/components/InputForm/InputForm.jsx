@@ -1,11 +1,11 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import phonebookOperations from 'Redux/Reducer/phonebook-operations';
 import { MyForm, MyInput } from './styled';
-import { useGetDataQuery, usePostDataMutation } from 'Redux/API/API';
 
 const InputForm = () => {
   // Hooks
-  const { data } = useGetDataQuery();
-  const [setData] = usePostDataMutation();
+  const dispatch = useDispatch();
   const [inputName, setInputName] = useState('');
   const [inputPhone, setInputPhone] = useState('');
 
@@ -23,7 +23,7 @@ const InputForm = () => {
       return false;
     }
 
-    setData(data);
+    dispatch(phonebookOperations.addUserPhonebook(data));
 
     if (data) {
       setInputName('');
@@ -37,10 +37,11 @@ const InputForm = () => {
 
   const newData = () => ({
     name: inputName,
-    phone: inputPhone,
+    number: inputPhone,
   });
 
-  const checkUsers = phone => data.find(({ name }) => name.toLowerCase() === phone.name.toLowerCase());
+  const checkUsers = phone =>
+    [].find(({ name }) => name.toLowerCase() === phone.name.toLowerCase());
 
   return (
     <MyForm onSubmit={handleSubmitForm}>

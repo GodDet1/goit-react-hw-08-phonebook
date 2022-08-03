@@ -1,16 +1,17 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { changeFilter } from 'Redux/Action/actions';
+import { changeFilter } from 'Redux/Reducer/phonebook-slice';
 import { Container, MyInput, MyP } from './styled';
 
 function Filter() {
   const filter = useSelector(
     ({
-      noteReducer: {
+      phonebookSlice: {
         contacts: { filter },
       },
     }) => filter
   );
   const dispatch = useDispatch();
+
   const handleFilter = e =>
     dispatch(changeFilter(e.currentTarget.value.toLowerCase()));
 
