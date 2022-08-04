@@ -1,19 +1,23 @@
-.container {
+import styled from '@emotion/styled';
+import { NavLink } from 'react-router-dom';
+
+export const Container = styled.div`
+  display: flex;
   background-color: #acacac;
 
   text-decoration: none;
   box-shadow: 0px 3px 20px #7a7a7a;
-}
+`;
 
-.container__nav {
+export const NavContainer = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
 
   padding: 20px;
-}
+`;
 
-.wellcome {
+export const WellcomeContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -50,9 +54,10 @@
 
     text-shadow: 0 0 10px #ffffff;
   }
-}
+`;
 
-.nav__link {
+export const MyNavLink = styled(NavLink)`
+  padding: 5px 10px;
   margin-right: 20px;
 
   font-size: 16px;
@@ -65,16 +70,11 @@
   text-decoration: inherit;
 
   text-shadow: 1px 1px 0 #7a7a7a;
-}
+  &.active {
+    border: 1px solid white;
+    border-radius: 10px;
 
-.log_link {
-  text-decoration: inherit;
-
-  &:first-child {
-    margin-right: 10px;
+    box-shadow: 2px 2px 2px 0px white, inset 2px 2px 10px 0px white,
+      2px 2px 10px 5px rgba(0, 0, 0, 0);
   }
-
-  &:last-child {
-    margin-left: 10px;
-  }
-}
+`;

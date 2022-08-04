@@ -1,8 +1,12 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
 import authOperations from 'Redux/Auth/auth-operations';
-import styled from './styled.module.scss';
+import {
+  Container,
+  MyNavLink,
+  NavContainer,
+  WellcomeContainer,
+} from './styled.module';
 
 function NavBar() {
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
@@ -14,39 +18,29 @@ function NavBar() {
   };
 
   return (
-    <div className={styled.container}>
-      <div className={`${styled.container__nav}  container`}>
+    <Container>
+      <NavContainer className={`container`}>
         <nav>
-          <NavLink to="/" className={styled.nav__link}>
-            Home
-          </NavLink>
+          <MyNavLink to="/">Home</MyNavLink>
 
-          {isLoggedIn && (
-            <NavLink to="/phonebook" className={styled.nav__link}>
-              Phonebook
-            </NavLink>
-          )}
+          {isLoggedIn && <MyNavLink to="/phonebook">Phonebook</MyNavLink>}
         </nav>
 
         {isLoggedIn ? (
-          <div className={styled.wellcome}>
+          <WellcomeContainer>
             <p>Wellcome {userName}!!</p>
             <button type="button" onClick={handleLogout}>
               Exit
             </button>
-          </div>
+          </WellcomeContainer>
         ) : (
           <div>
-            <NavLink to="/login" className={styled.nav__link}>
-              Login
-            </NavLink>
-            <NavLink to="/register" className={styled.nav__link}>
-              Register
-            </NavLink>
+            <MyNavLink to="/login">Login</MyNavLink>
+            <MyNavLink to="/register">Register</MyNavLink>
           </div>
         )}
-      </div>
-    </div>
+      </NavContainer>
+    </Container>
   );
 }
 
