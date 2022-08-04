@@ -9,6 +9,7 @@ const initialState = {
   token: null,
   isLoggedIn: false,
   isRefreshing: false,
+  error: null,
 };
 
 const authSlice = createSlice({
@@ -19,12 +20,20 @@ const authSlice = createSlice({
       state.user = action.payload.user;
       state.token = action.payload.token;
       state.isLoggedIn = true;
+      state.error = null;
+    },
+    [authOperations.registerUser.rejected](state, action) {
+      state.error = 'Email adress is already registered';
     },
 
     [authOperations.loginUser.fulfilled](state, action) {
       state.user = action.payload.user;
       state.token = action.payload.token;
       state.isLoggedIn = true;
+      state.error = null;
+    },
+    [authOperations.loginUser.rejected](state, action) {
+      state.error = 'No user with this email or password wrong!';
     },
 
     [authOperations.logoutUser.fulfilled](state, action) {
@@ -34,17 +43,22 @@ const authSlice = createSlice({
       };
       state.token = null;
       state.isLoggedIn = false;
+      state.error = null;
     },
     [authOperations.fetchCurrentUser.pending](state, action) {
       state.isRefreshing = true;
+      state.error = null;
     },
     [authOperations.fetchCurrentUser.rejected](state, action) {
+      console.log(action);
       state.isRefreshing = false;
+      state.error = action.payload;
     },
     [authOperations.fetchCurrentUser.fulfilled](state, action) {
       state.user = action.payload;
       state.isLoggedIn = true;
       state.isRefreshing = false;
+      state.error = null;
     },
   },
 

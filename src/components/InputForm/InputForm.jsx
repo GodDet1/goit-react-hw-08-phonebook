@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import phonebookOperations from 'Redux/Reducer/phonebook-operations';
-import { MyForm, MyInput } from './styled';
+import { MyForm, MyInput } from './styled.module';
 
 const InputForm = () => {
   // Hooks

@@ -18,23 +18,30 @@ function Login() {
   };
 
   return (
-    <Form onSubmit={handleLogin}>
-      <Label>
-        <LabelName>Email</LabelName>
-        <input type="email" name="login" value={email} onChange={handleEmail} />
-      </Label>
-      <Label>
-        <LabelName>Password</LabelName>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePassword}
-        />
-      </Label>
+    <div className="container">
+      <Form onSubmit={handleLogin}>
+        <Label>
+          <LabelName>Email</LabelName>
+          <input
+            type="email"
+            name="login"
+            value={email}
+            onChange={handleEmail}
+          />
+        </Label>
+        <Label>
+          <LabelName>Password</LabelName>
+          <input
+            type="password"
+            name="password"
+            value={password}
+            onChange={handlePassword}
+          />
+        </Label>
 
-      <button>Login</button>
-    </Form>
+        <button>Login</button>
+      </Form>
+    </div>
   );
 }
 

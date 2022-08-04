@@ -1,8 +1,8 @@
 .container {
-  border-bottom: 2px solid black;
-  background-color: antiquewhite;
+  background-color: #acacac;
 
   text-decoration: none;
+  box-shadow: 0px 3px 20px #7a7a7a;
 }
 
 .container__nav {
@@ -17,12 +17,54 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  & p {
+    margin-right: 10px;
+
+    font-size: 16px;
+    font-weight: 300;
+    margin-top: 0px;
+    letter-spacing: 2px;
+    font-weight: 300;
+    color: white;
+
+    text-decoration: inherit;
+
+    text-shadow: 1px 1px 0 #7a7a7a;
+  }
+
+  & button {
+    padding: 3px 10px;
+    border-radius: 5px;
+
+    background-color: white;
+    color: #acacac;
+    font-size: 12px;
+    line-height: 1.3;
+    letter-spacing: 1px;
+
+    border: none;
+    cursor: pointer;
+    box-shadow: -10px 0px 13px -7px #fcfbfb, 10px 0px 13px -7px #fffefe,
+      5px 5px 15px 5px rgba(255, 254, 254, 0.486);
+
+    text-shadow: 0 0 10px #ffffff;
+  }
 }
 
 .nav__link {
   margin-right: 20px;
 
+  font-size: 16px;
+  font-weight: 300;
+  margin-top: 0px;
+  letter-spacing: 2px;
+  font-weight: 300;
+  color: white;
+
   text-decoration: inherit;
+
+  text-shadow: 1px 1px 0 #7a7a7a;
 }
 
 .log_link {

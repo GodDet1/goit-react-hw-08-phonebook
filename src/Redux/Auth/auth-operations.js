@@ -42,7 +42,7 @@ const fetchCurrentUser = createAsyncThunk(
     const initialToken = thunkAPI.getState().auth.token;
 
     if (initialToken === null) {
-      return thunkAPI.rejectWithValue('no current user');
+      return thunkAPI.rejectWithValue(null);
     }
 
     token.setToken(initialToken);

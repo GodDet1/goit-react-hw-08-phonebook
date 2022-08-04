@@ -29,7 +29,7 @@ function NavBar() {
         </nav>
 
         {isLoggedIn ? (
-          <div>
+          <div className={styled.wellcome}>
             <p>Wellcome {userName}!!</p>
             <button type="button" onClick={handleLogout}>
               Exit

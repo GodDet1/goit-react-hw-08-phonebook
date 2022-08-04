@@ -5,6 +5,8 @@ import NavBar from './NavBar/NavBar';
 import PrivateRoute from './UserMenu/PrivateRoute';
 import PublicRoute from './UserMenu/PublicRoute';
 import Home from './VIews/Home/Home';
+import { Bars } from 'react-loader-spinner';
+import { Notify } from 'notiflix';
 
 const Login = lazy(() => import('./VIews/Login/Login'));
 const Register = lazy(() => import('./VIews/Register/Register'));
@@ -13,18 +15,28 @@ const Phonebook = lazy(() => import('./VIews/Phonebook/Phonebook'));
 const App = () => {
   const dispatch = useDispatch();
   const isFetching = useSelector(({ auth: { isRefreshing } }) => isRefreshing);
-
-  console.log(isFetching);
+  const error = useSelector(({ auth: { error } }) => error);
 
   useEffect(() => {
     dispatch(authOperations.fetchCurrentUser());
   }, [dispatch]);
 
+  error && Notify.failure(error);
+
   return (
     <>
       {!isFetching && <NavBar />}
 
-      <Suspense fallback={<div>Loading..</div>}>
+      <Suspense
+        fallback={
+          <Bars
+            color="#acacac"
+            wrapperStyle={{
+              justifyContent: 'center',
+            }}
+          />
+        }
+      >
         <PublicRoute path="/">
           <Home />
         </PublicRoute>
