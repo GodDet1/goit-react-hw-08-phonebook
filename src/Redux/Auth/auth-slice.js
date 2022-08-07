@@ -23,7 +23,6 @@ const authSlice = createSlice({
       state.error = null;
     },
     [authOperations.registerUser.rejected](state, action) {
-      console.log(action);
       state.error = 'Email adress is already registered or incorrect data';
     },
 
