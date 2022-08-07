@@ -7,6 +7,7 @@ import PublicRoute from './UserMenu/PublicRoute';
 import Home from './VIews/Home/Home';
 import { Bars } from 'react-loader-spinner';
 import { Notify } from 'notiflix';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 const Login = lazy(() => import('./VIews/Login/Login'));
 const Register = lazy(() => import('./VIews/Register/Register'));
@@ -26,7 +27,6 @@ const App = () => {
   return (
     <>
       {!isFetching && <NavBar />}
-
       <Suspense
         fallback={
           <Bars
@@ -37,21 +37,42 @@ const App = () => {
           />
         }
       >
-        <PublicRoute path="/">
-          <Home />
-        </PublicRoute>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <PublicRoute>
+                <Home />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <PublicRoute restricted redirectTo="/phonebook">
+                <Login />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <PublicRoute restricted redirectTo="/phonebook">
+                <Register />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/phonebook"
+            element={
+              <PrivateRoute redirectTo="/login">
+                <Phonebook />
+              </PrivateRoute>
+            }
+          />
 
-        <PublicRoute path="/login" restricted redirectTo="/phonebook">
-          <Login />
-        </PublicRoute>
-
-        <PublicRoute path="/register" restricted redirectTo="/phonebook">
-          <Register />
-        </PublicRoute>
-
-        <PrivateRoute path="/phonebook" redirectTo="/login">
-          <Phonebook />
-        </PrivateRoute>
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
       </Suspense>
     </>
   );

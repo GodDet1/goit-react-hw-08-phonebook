@@ -1,11 +1,18 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import phonebookOperations from 'Redux/Reducer/phonebook-operations';
 import { MyForm, MyInput } from './styled.module';
 
 const InputForm = () => {
   // Hooks
   const dispatch = useDispatch();
+  const phonebook = useSelector(
+    ({
+      phonebookSlice: {
+        contacts: { items },
+      },
+    }) => items
+  );
   const [inputName, setInputName] = useState('');
   const [inputPhone, setInputPhone] = useState('');
 
@@ -41,7 +48,9 @@ const InputForm = () => {
   });
 
   const checkUsers = phone =>
-    [].find(({ name }) => name.toLowerCase() === phone.name.toLowerCase());
+    phonebook.find(
+      ({ name }) => name.toLowerCase() === phone.name.toLowerCase()
+    );
 
   return (
     <MyForm onSubmit={handleSubmitForm}>

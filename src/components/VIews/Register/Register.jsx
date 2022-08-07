@@ -17,9 +17,6 @@ function Register() {
   const handleSubmit = e => {
     e.preventDefault();
     dispatch(authOperations.registerUser({ name, email, password }));
-    setEmail('');
-    setName('');
-    setPassword('');
   };
 
   return (
